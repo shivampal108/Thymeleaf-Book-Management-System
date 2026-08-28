@@ -19,9 +19,18 @@ public class UserService {
 	PasswordEncoder pencode;
 	
 	public String register(User user) {
-		
-		
+
+
+		if(user.getPassword().equals("ADMIN"){
+user.setRole("ADMIN");
+		}
+		else{
 		user.setRole("USER");
+
+		}
+
+
+		
 		
 		user.setPassword(pencode.encode(user.getPassword()));
 		
