@@ -11,60 +11,37 @@ import com.security.demo.repository.UserRepository;
 
 @Service
 public class UserService {
-	
-	@Autowired
-	UserRepository ur;
-	
-	@Autowired
-	PasswordEncoder pencode;
-	
-	public String register(User user) {
 
+    @Autowired
+    UserRepository ur;
 
-		if(user.getPassword().equals("ADMIN"){
-user.setRole("ADMIN");
-		}
-		else{
-		user.setRole("USER");
+    @Autowired
+    PasswordEncoder pencode;
 
-		}
+    public String register(User user) {
 
+        if (user.getPassword().equals("ADMIN")) {
+            user.setRole("ADMIN");
+        } else {
+            user.setRole("USER");
+        }
 
-		
-		
-		user.setPassword(pencode.encode(user.getPassword()));
-		
-		ur.save(user);
-		
-		
-		
-		return "added";
-		
-		
-	}
-	
-	
-	
-	public List<User> getUsers() {
-		return ur.findAll();
-		
-	}
-	
-	
-	
-	
-	public User getById(Long id) {
-		
-		
-		return ur.findById(id).get();
-	}
-	
-	
-	public User  getByUserName(String name) {
-		
-		
-		return ur.findByUsername(name).get();
-	}
-	
+        user.setPassword(pencode.encode(user.getPassword()));
 
+        ur.save(user);
+
+        return "added";
+    }
+
+    public List<User> getUsers() {
+        return ur.findAll();
+    }
+
+    public User getById(Long id) {
+        return ur.findById(id).get();
+    }
+
+    public User getByUserName(String name) {
+        return ur.findByUsername(name).get();
+    }
 }
